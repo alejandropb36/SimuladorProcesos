@@ -24,7 +24,7 @@ namespace SimuladorProcesos
             Terminado = -1,
             Listo,
             Ejecutandose,
-            Bloqueado
+            Suspendido
         }
 
         public void setNombre(string nombre)
@@ -61,8 +61,8 @@ namespace SimuladorProcesos
                 case Estado.Ejecutandose:
                     resultado = "Ejecutandose";
                     break;
-                case Estado.Bloqueado:
-                    resultado = "Bloqueado";
+                case Estado.Suspendido:
+                    resultado = "Suspendido";
                     break;
                 default:
                     resultado = "Error";
