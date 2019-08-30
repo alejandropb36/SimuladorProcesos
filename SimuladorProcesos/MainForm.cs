@@ -48,7 +48,7 @@ namespace SimuladorProcesos
         private void agregarProceso(int hilo)
         {
             Process process = colaProcesos.Dequeue();
-            dataGridViewProcesos.Rows.Add(process.Id, process.ProcessName, "Listo", hilo.ToString());
+            dataGridViewProcesos.Rows.Add(process.Id, process.ProcessName, System.Threading.ThreadState.Running, hilo.ToString());
         }
 
         private void correr(Thread thread)
@@ -57,9 +57,9 @@ namespace SimuladorProcesos
             {
                 thread.Resume();
             }
-            else if(thread.ThreadState == System.Threading.ThreadState.Running)
+            else if(thread.ThreadState == System.Threading.ThreadState.WaitSleepJoin)
             {
-
+                thread.Resume();
             }
             else
             {
@@ -109,12 +109,12 @@ namespace SimuladorProcesos
             {
                 case 1:
                     correr(thread1);
-                    dataGridViewProcesos.CurrentRow.Cells[2].Value = "Corriendo";
+                    dataGridViewProcesos.CurrentRow.Cells[2].Value = thread1.ThreadState;
                     Console.WriteLine("Hilo 1");
                     break;
                 case 2:
                     correr(thread2);
-                    dataGridViewProcesos.CurrentRow.Cells[2].Value = "Corriendo";
+                    dataGridViewProcesos.CurrentRow.Cells[2].Value = thread2.ThreadState;
                     Console.WriteLine("Hilo 2");
                     break;
                 default:
@@ -130,12 +130,12 @@ namespace SimuladorProcesos
             {
                 case 1:
                     suspender(thread1);
-                    dataGridViewProcesos.CurrentRow.Cells[2].Value = "Suspendido";
+                    dataGridViewProcesos.CurrentRow.Cells[2].Value = thread1.ThreadState;
                     Console.WriteLine("Hilo 1");
                     break;
                 case 2:
                     suspender(thread2);
-                    dataGridViewProcesos.CurrentRow.Cells[2].Value = "Suspendido";
+                    dataGridViewProcesos.CurrentRow.Cells[2].Value = thread2.ThreadState;
                     Console.WriteLine("Hilo 2");
                     break;
                 default:
@@ -151,14 +151,14 @@ namespace SimuladorProcesos
             {
                 case 1:
                     finalizar(ref thread1);
-                    dataGridViewProcesos.CurrentRow.Cells[2].Value = "Termiando";
+                    dataGridViewProcesos.CurrentRow.Cells[2].Value = thread1.ThreadState;
                     dataGridViewProcesos.CurrentRow.Cells[3].Value = "";
                     agregarProceso(hilo);
                     Console.WriteLine("Hilo 1");
                     break;
                 case 2:
                     finalizar(ref thread2);
-                    dataGridViewProcesos.CurrentRow.Cells[2].Value = "Terminado";
+                    dataGridViewProcesos.CurrentRow.Cells[2].Value = thread2.ThreadState;
                     dataGridViewProcesos.CurrentRow.Cells[3].Value = "";
                     agregarProceso(hilo);
                     Console.WriteLine("Hilo 2");
