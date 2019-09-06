@@ -11,20 +11,30 @@ namespace SimuladorProcesos
         private int id;
         private string nombre;
         private Estado estado;
+        private int tiempoLlegada;
+        private int duracion;
 
-        public Proceso(int id, string nombre, Estado estado)
+        public Proceso(int id, string nombre, Estado estado, int tiempoLlegada, int duracion)
         {
             this.id = id;
             this.nombre = nombre;
             this.estado = estado;
+            this.tiempoLlegada = tiempoLlegada;
+            this.duracion = duracion;
         }
 
         public enum Estado
         {
-            Terminado = -1,
-            Listo,
-            Ejecutandose,
-            Suspendido
+            NUEVO,
+            LISTO,
+            EJECUCION,
+            BLOQUEADO,
+            TERMIANDO
+        }
+
+        public void setId(int id)
+        {
+            this.id = id;
         }
 
         public void setNombre(string nombre)
@@ -37,6 +47,16 @@ namespace SimuladorProcesos
             this.estado = estado;
         }
 
+        public void setTiempoLlegada(int tiempoLlegada)
+        {
+            this.tiempoLlegada = tiempoLlegada;
+        }
+
+        public void setDuracion(int duracion)
+        {
+            this.duracion = duracion;
+        }
+
         public int getId()
         {
             return this.id;
@@ -47,30 +67,20 @@ namespace SimuladorProcesos
             return this.nombre;
         }
 
-        public string getEstado()
+        public Estado getEstado()
         {
-            string resultado = "";
-            switch (estado)
-            {
-                case Estado.Terminado:
-                    resultado = "Terminado";
-                    break;
-                case Estado.Listo:
-                    resultado = "Listo";
-                    break;
-                case Estado.Ejecutandose:
-                    resultado = "Ejecutandose";
-                    break;
-                case Estado.Suspendido:
-                    resultado = "Suspendido";
-                    break;
-                default:
-                    resultado = "Error";
-                    break;
-            }
-            return resultado;
+            return this.estado;
         }
 
+        public int getTiempoLlegada()
+        {
+            return this.tiempoLlegada;
+        }
+
+        public int getDuracion()
+        {
+            return this.duracion;
+        }
 
     }
 }

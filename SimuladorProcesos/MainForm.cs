@@ -18,155 +18,84 @@ namespace SimuladorProcesos
         private Thread thread1;
         private Thread thread2;
         private Process[] process;
-        private Queue<Process> colaProcesos;
-        int hilo;
+        private Queue<Proceso> colaProcesos;
+        private Queue<Proceso> colaProcesosListos;
+        private Queue<Proceso> colaProcesosBloqueados;
+        private Random random;
 
         public MainForm()
         {
             InitializeComponent();
-            thread1 = new Thread(new ThreadStart(prepararProceso));
-            thread2 = new Thread(new ThreadStart(prepararProceso));
-            colaProcesos = new Queue<Process>();
+            colaProcesos = new Queue<Proceso>();
+            colaProcesosListos = new Queue<Proceso>();
+            colaProcesosBloqueados = new Queue<Proceso>();
+            
+            random = new Random();
 
             process = Process.GetProcesses();
             foreach(Process p in process)
             {
-                colaProcesos.Enqueue(p);
+                int duracion = random.Next(2,8);
+                Proceso proceso = new Proceso(p.Id, p.ProcessName, Proceso.Estado.LISTO, 0, duracion);
+                colaProcesos.Enqueue(proceso);
             }
-            agregarProceso(1);
-            agregarProceso(2);
+            agregarProceso();
             dataGridViewProcesos.Rows[0].Selected = true;
             dataGridViewProcesos.Select();
+            thread1 = new Thread(new ThreadStart(ejecutar));
         }
-        
+
         private void prepararProceso()
         {
             while (true)
                 Thread.Sleep(100);
         }
 
-        private void agregarProceso(int hilo)
+        private void agregarProceso()
         {
-            Process process = colaProcesos.Dequeue();
-            dataGridViewProcesos.Rows.Add(process.Id, process.ProcessName, System.Threading.ThreadState.Running, hilo.ToString());
+            Proceso proceso = colaProcesos.Dequeue();
+            dataGridViewProcesos.Rows.Add(proceso.getId(), proceso.getNombre(), proceso.getEstado(), proceso.getDuracion().ToString());
         }
 
-        private void correr(Thread thread)
+        private void ejecutar ()
         {
-            if(thread.ThreadState == System.Threading.ThreadState.Suspended)
-            {
-                thread.Resume();
-            }
-            else if(thread.ThreadState == System.Threading.ThreadState.WaitSleepJoin)
-            {
-                thread.Resume();
-            }
-            else
-            {
-                thread.Start();
-            }
+            dataGridViewProcesos.Rows[0].Cells[2].Value = Proceso.Estado.EJECUCION;
+            int tiempo = int.Parse(dataGridViewProcesos.Rows[0].Cells[3].Value.ToString());
+            tiempo = tiempo * 1000;
+            Thread.Sleep(tiempo);
+            dataGridViewProcesos.Rows.Remove(dataGridViewProcesos.Rows[0]);
+            ejecutar();
+
         }
 
-        private void suspender(Thread thread)
+        private void bloquear()
         {
-            if(thread.ThreadState == System.Threading.ThreadState.Running)
-            {
-                thread.Suspend();
-            }
+            
         }
 
-        private void finalizar(ref Thread thread)
+        private void Terminar()
         {
-            if(thread.ThreadState == System.Threading.ThreadState.Running)
-            {
-                thread.Abort();
-                Console.WriteLine(thread.ThreadState);
-                thread = new Thread(new ThreadStart(prepararProceso));
-                Console.WriteLine(thread.ThreadState);
-                
-            }
-            else
-            {
-                // Alerta de que no se puede finalizar  por que no esta corriendo
-            }
+            
         }
 
-        private void setHilo()
+        private void fcfs()
         {
-            if(dataGridViewProcesos.CurrentRow.Cells[3].Value.ToString() != "")
-            {
-                this.hilo = int.Parse(dataGridViewProcesos.CurrentRow.Cells[3].Value.ToString());
-            }
-            else
-            {
-                hilo = 0;
-            }
+           
         }
+
         private void buttonCorrer_Click(object sender, EventArgs e)
         {
-            setHilo();
-            switch (hilo)
-            {
-                case 1:
-                    correr(thread1);
-                    dataGridViewProcesos.CurrentRow.Cells[2].Value = thread1.ThreadState;
-                    Console.WriteLine("Hilo 1");
-                    break;
-                case 2:
-                    correr(thread2);
-                    dataGridViewProcesos.CurrentRow.Cells[2].Value = thread2.ThreadState;
-                    Console.WriteLine("Hilo 2");
-                    break;
-                default:
-                    // Aqui puede ir una alerta de proceso terminado
-                    break;
-            }
+
         }
 
         private void buttonSuspender_Click(object sender, EventArgs e)
         {
-            setHilo();
-            switch (hilo)
-            {
-                case 1:
-                    suspender(thread1);
-                    dataGridViewProcesos.CurrentRow.Cells[2].Value = thread1.ThreadState;
-                    Console.WriteLine("Hilo 1");
-                    break;
-                case 2:
-                    suspender(thread2);
-                    dataGridViewProcesos.CurrentRow.Cells[2].Value = thread2.ThreadState;
-                    Console.WriteLine("Hilo 2");
-                    break;
-                default:
-                    // Aqui puede ir una alerta de proceso terminado
-                    break;
-            }
+            
         }
 
         private void buttonFinalizar_Click(object sender, EventArgs e)
         {
-            setHilo();
-            switch (hilo)
-            {
-                case 1:
-                    finalizar(ref thread1);
-                    dataGridViewProcesos.CurrentRow.Cells[2].Value = thread1.ThreadState;
-                    dataGridViewProcesos.CurrentRow.Cells[3].Value = "";
-                    agregarProceso(hilo);
-                    Console.WriteLine("Hilo 1");
-                    break;
-                case 2:
-                    finalizar(ref thread2);
-                    dataGridViewProcesos.CurrentRow.Cells[2].Value = thread2.ThreadState;
-                    dataGridViewProcesos.CurrentRow.Cells[3].Value = "";
-                    agregarProceso(hilo);
-                    Console.WriteLine("Hilo 2");
-                    break;
-                default:
-                    // Aqui puede ir una alerta de proceso terminado
-                    break;
-            }
+            
         }
     }
 }
