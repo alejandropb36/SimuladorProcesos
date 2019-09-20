@@ -6,80 +6,25 @@ using System.Threading.Tasks;
 
 namespace SimuladorProcesos
 {
-    class Proceso
+    public class Proceso
     {
-        private int id;
-        private string nombre;
-        private Estado estado;
-        private int tiempoLlegada;
-        private int duracion;
 
-        public Proceso(int id, string nombre, Estado estado, int tiempoLlegada, int duracion)
-        {
-            this.id = id;
-            this.nombre = nombre;
-            this.estado = estado;
-            this.tiempoLlegada = tiempoLlegada;
-            this.duracion = duracion;
-        }
+        public string Nombre { get; set; }
+        public int Id { get; set; }
+        public int Tiempo { get; set; }
+        public int IO { get; set; }
+        public string Estado { get; set; }
+        public int Quantum { get; set; }
+        public int TiempoRestante { get; set; }
 
-        public enum Estado
+        public Proceso(int id, string nombre, int tiempo)
         {
-            NUEVO,
-            LISTO,
-            EJECUCION,
-            BLOQUEADO,
-            TERMIANDO
-        }
-
-        public void setId(int id)
-        {
-            this.id = id;
-        }
-
-        public void setNombre(string nombre)
-        {
-            this.nombre = nombre;
-        }
-
-        public void setEstado(Estado estado)
-        {
-            this.estado = estado;
-        }
-
-        public void setTiempoLlegada(int tiempoLlegada)
-        {
-            this.tiempoLlegada = tiempoLlegada;
-        }
-
-        public void setDuracion(int duracion)
-        {
-            this.duracion = duracion;
-        }
-
-        public int getId()
-        {
-            return this.id;
-        }
-
-        public string getNombre()
-        {
-            return this.nombre;
-        }
-
-        public Estado getEstado()
-        {
-            return this.estado;
-        }
-
-        public int getTiempoLlegada()
-        {
-            return this.tiempoLlegada;
-        }
-
-        public int getDuracion()
-        {
-            return this.duracion;
+            this.Id = id;
+            this.Nombre = nombre;
+            this.Estado = "NEW";
+            this.Tiempo = tiempo;
+            this.IO = 0;
+            this.TiempoRestante = 0;
         }
 
     }

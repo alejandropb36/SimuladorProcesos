@@ -15,77 +15,67 @@ namespace SimuladorProcesos
 {
     public partial class MainForm : Form
     {
-        private Thread thread1;
-        private Thread thread2;
         private Process[] process;
-        private Queue<Proceso> colaProcesos;
-        private Queue<Proceso> colaProcesosListos;
-        private Queue<Proceso> colaProcesosBloqueados;
+        private LinkedList<Proceso> procesos;
         private Random random;
+        private RoundRobin roundRobin;
 
         public MainForm()
         {
             InitializeComponent();
-            colaProcesos = new Queue<Proceso>();
-            colaProcesosListos = new Queue<Proceso>();
-            colaProcesosBloqueados = new Queue<Proceso>();
-            
+            procesos = new LinkedList<Proceso>();
             random = new Random();
-
             process = Process.GetProcesses();
-            foreach(Process p in process)
+            cargarProcesos();
+
+        }
+
+        private void cargarProcesos()
+        {
+            int tiempo;
+
+            /* Carga todo lo procesos*/
+            foreach (Process p in process)
             {
-                int duracion = random.Next(2,8);
-                Proceso proceso = new Proceso(p.Id, p.ProcessName, Proceso.Estado.LISTO, 0, duracion);
-                colaProcesos.Enqueue(proceso);
+                tiempo = random.Next(2, 8);
+                Proceso proceso = new Proceso(p.Id, p.ProcessName, tiempo);
+                procesos.AddLast(proceso);
+                agregarProceso(proceso);
             }
-            agregarProceso();
-            dataGridViewProcesos.Rows[0].Selected = true;
-            dataGridViewProcesos.Select();
-            thread1 = new Thread(new ThreadStart(ejecutar));
+
+            /*Carga solo 15*/
+            //for (int i = 0; i < 15; i++)
+            //{
+            //    tiempo = random.Next(2, 5);
+            //    Proceso proceso = new Proceso(process[i].Id, process[i].ProcessName, tiempo);
+            //    procesos.AddLast(proceso);
+            //    agregarProceso(proceso);
+            //}
         }
 
-        private void prepararProceso()
+        private void agregarProceso(Proceso proceso)
         {
-            while (true)
-                Thread.Sleep(100);
-        }
-
-        private void agregarProceso()
-        {
-            Proceso proceso = colaProcesos.Dequeue();
-            dataGridViewProcesos.Rows.Add(proceso.getId(), proceso.getNombre(), proceso.getEstado(), proceso.getDuracion().ToString());
-        }
-
-        private void ejecutar ()
-        {
-            dataGridViewProcesos.Rows[0].Cells[2].Value = Proceso.Estado.EJECUCION;
-            int tiempo = int.Parse(dataGridViewProcesos.Rows[0].Cells[3].Value.ToString());
-            tiempo = tiempo * 1000;
-            Thread.Sleep(tiempo);
-            dataGridViewProcesos.Rows.Remove(dataGridViewProcesos.Rows[0]);
-            ejecutar();
-
-        }
-
-        private void bloquear()
-        {
-            
-        }
-
-        private void Terminar()
-        {
-            
-        }
-
-        private void fcfs()
-        {
-           
+            string id = proceso.Id.ToString();
+            string nombre = proceso.Nombre;
+            string estado = proceso.Estado;
+            string tiempo = proceso.Tiempo.ToString();
+            string[] row = {id, nombre, estado, tiempo};
+            dataGridViewProcesos.Rows.Add(row);
         }
 
         private void buttonCorrer_Click(object sender, EventArgs e)
         {
+            int quantum = (int)numericUpDownQuantum.Value;
+            Proceso[] arrProcesos = procesos.ToArray();
 
+            buttonBloquear.Hide();
+            buttonEjecutar.Hide();
+            buttonTerminar.Hide();
+            numericUpDownQuantum.Hide();
+            labelQuantum.Text += ": " + quantum;
+
+            roundRobin = new RoundRobin(ref dataGridViewProcesos);
+            roundRobin.runRoundRobin(ref arrProcesos, quantum);
         }
 
         private void buttonSuspender_Click(object sender, EventArgs e)

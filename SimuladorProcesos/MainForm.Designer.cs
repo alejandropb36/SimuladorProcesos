@@ -35,14 +35,11 @@
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.duracion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewBloqueados = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tiempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numericUpDownQuantum = new System.Windows.Forms.NumericUpDown();
+            this.labelQuantum = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProcesos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBloqueados)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantum)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewProcesos
@@ -52,7 +49,7 @@
             this.id,
             this.nombre,
             this.estado,
-            this.duracion});
+            this.tiempo});
             this.dataGridViewProcesos.Location = new System.Drawing.Point(12, 12);
             this.dataGridViewProcesos.Name = "dataGridViewProcesos";
             this.dataGridViewProcesos.Size = new System.Drawing.Size(377, 277);
@@ -104,60 +101,55 @@
             this.estado.HeaderText = "Estado";
             this.estado.Name = "estado";
             // 
-            // duracion
+            // tiempo
             // 
-            this.duracion.HeaderText = "Duración";
-            this.duracion.Name = "duracion";
+            this.tiempo.HeaderText = "Tiempo";
+            this.tiempo.Name = "tiempo";
             // 
-            // dataGridViewBloqueados
+            // numericUpDownQuantum
             // 
-            this.dataGridViewBloqueados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewBloqueados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4});
-            this.dataGridViewBloqueados.Location = new System.Drawing.Point(12, 334);
-            this.dataGridViewBloqueados.Name = "dataGridViewBloqueados";
-            this.dataGridViewBloqueados.Size = new System.Drawing.Size(377, 277);
-            this.dataGridViewBloqueados.TabIndex = 4;
+            this.numericUpDownQuantum.Location = new System.Drawing.Point(439, 205);
+            this.numericUpDownQuantum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownQuantum.Name = "numericUpDownQuantum";
+            this.numericUpDownQuantum.Size = new System.Drawing.Size(56, 20);
+            this.numericUpDownQuantum.TabIndex = 4;
+            this.numericUpDownQuantum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
-            // dataGridViewTextBoxColumn1
+            // labelQuantum
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 50;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Nombre";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Estado";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Duración";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.labelQuantum.AutoSize = true;
+            this.labelQuantum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelQuantum.Location = new System.Drawing.Point(395, 171);
+            this.labelQuantum.Name = "labelQuantum";
+            this.labelQuantum.Size = new System.Drawing.Size(82, 20);
+            this.labelQuantum.TabIndex = 5;
+            this.labelQuantum.Text = "Quantum";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(515, 623);
-            this.Controls.Add(this.dataGridViewBloqueados);
+            this.ClientSize = new System.Drawing.Size(515, 334);
+            this.Controls.Add(this.labelQuantum);
+            this.Controls.Add(this.numericUpDownQuantum);
             this.Controls.Add(this.buttonTerminar);
             this.Controls.Add(this.buttonBloquear);
             this.Controls.Add(this.buttonEjecutar);
             this.Controls.Add(this.dataGridViewProcesos);
             this.Name = "MainForm";
-            this.Text = "Simulador de procesos";
+            this.Text = "Simulador de procesos Round Robin";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProcesos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBloqueados)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantum)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -170,12 +162,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn estado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn duracion;
-        private System.Windows.Forms.DataGridView dataGridViewBloqueados;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tiempo;
+        private System.Windows.Forms.NumericUpDown numericUpDownQuantum;
+        private System.Windows.Forms.Label labelQuantum;
     }
 }
 
