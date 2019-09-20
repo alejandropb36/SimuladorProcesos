@@ -29,17 +29,20 @@
         private void InitializeComponent()
         {
             this.dataGridViewProcesos = new System.Windows.Forms.DataGridView();
-            this.buttonEjecutar = new System.Windows.Forms.Button();
-            this.buttonBloquear = new System.Windows.Forms.Button();
-            this.buttonTerminar = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tiempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonEjecutar = new System.Windows.Forms.Button();
+            this.buttonBloquear = new System.Windows.Forms.Button();
+            this.buttonTerminar = new System.Windows.Forms.Button();
             this.numericUpDownQuantum = new System.Windows.Forms.NumericUpDown();
             this.labelQuantum = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProcesos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantum)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridViewProcesos
@@ -50,10 +53,31 @@
             this.nombre,
             this.estado,
             this.tiempo});
-            this.dataGridViewProcesos.Location = new System.Drawing.Point(12, 12);
+            this.dataGridViewProcesos.Location = new System.Drawing.Point(12, 45);
             this.dataGridViewProcesos.Name = "dataGridViewProcesos";
-            this.dataGridViewProcesos.Size = new System.Drawing.Size(377, 277);
+            this.dataGridViewProcesos.Size = new System.Drawing.Size(377, 379);
             this.dataGridViewProcesos.TabIndex = 0;
+            // 
+            // id
+            // 
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.Width = 50;
+            // 
+            // nombre
+            // 
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            // 
+            // estado
+            // 
+            this.estado.HeaderText = "Estado";
+            this.estado.Name = "estado";
+            // 
+            // tiempo
+            // 
+            this.tiempo.HeaderText = "Tiempo";
+            this.tiempo.Name = "tiempo";
             // 
             // buttonEjecutar
             // 
@@ -85,27 +109,6 @@
             this.buttonTerminar.UseVisualStyleBackColor = true;
             this.buttonTerminar.Click += new System.EventHandler(this.buttonFinalizar_Click);
             // 
-            // id
-            // 
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.Width = 50;
-            // 
-            // nombre
-            // 
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            // 
-            // estado
-            // 
-            this.estado.HeaderText = "Estado";
-            this.estado.Name = "estado";
-            // 
-            // tiempo
-            // 
-            this.tiempo.HeaderText = "Tiempo";
-            this.tiempo.Name = "tiempo";
-            // 
             // numericUpDownQuantum
             // 
             this.numericUpDownQuantum.Location = new System.Drawing.Point(439, 205);
@@ -133,21 +136,42 @@
             this.labelQuantum.TabIndex = 5;
             this.labelQuantum.Text = "Quantum";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.infoToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(515, 24);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // infoToolStripMenuItem
+            // 
+            this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.infoToolStripMenuItem.Text = "Info";
+            this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(515, 334);
+            this.ClientSize = new System.Drawing.Size(515, 441);
             this.Controls.Add(this.labelQuantum);
             this.Controls.Add(this.numericUpDownQuantum);
             this.Controls.Add(this.buttonTerminar);
             this.Controls.Add(this.buttonBloquear);
             this.Controls.Add(this.buttonEjecutar);
             this.Controls.Add(this.dataGridViewProcesos);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Simulador de procesos Round Robin";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProcesos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantum)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -165,6 +189,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tiempo;
         private System.Windows.Forms.NumericUpDown numericUpDownQuantum;
         private System.Windows.Forms.Label labelQuantum;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
     }
 }
 

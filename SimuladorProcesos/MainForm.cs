@@ -27,7 +27,8 @@ namespace SimuladorProcesos
             random = new Random();
             process = Process.GetProcesses();
             cargarProcesos();
-
+            buttonBloquear.Hide();
+            buttonTerminar.Hide();
         }
 
         private void cargarProcesos()
@@ -35,22 +36,22 @@ namespace SimuladorProcesos
             int tiempo;
 
             /* Carga todo lo procesos*/
-            foreach (Process p in process)
-            {
-                tiempo = random.Next(2, 8);
-                Proceso proceso = new Proceso(p.Id, p.ProcessName, tiempo);
-                procesos.AddLast(proceso);
-                agregarProceso(proceso);
-            }
-
-            /*Carga solo 15*/
-            //for (int i = 0; i < 15; i++)
+            //foreach (Process p in process)
             //{
             //    tiempo = random.Next(2, 5);
-            //    Proceso proceso = new Proceso(process[i].Id, process[i].ProcessName, tiempo);
+            //    Proceso proceso = new Proceso(p.Id, p.ProcessName, tiempo);
             //    procesos.AddLast(proceso);
             //    agregarProceso(proceso);
             //}
+
+            /*Carga solo 15*/
+            for (int i = 0; i < 15; i++)
+            {
+                tiempo = random.Next(2, 5);
+                Proceso proceso = new Proceso(process[i].Id, process[i].ProcessName, tiempo);
+                procesos.AddLast(proceso);
+                agregarProceso(proceso);
+            }
         }
 
         private void agregarProceso(Proceso proceso)
@@ -69,8 +70,6 @@ namespace SimuladorProcesos
             Proceso[] arrProcesos = procesos.ToArray();
 
             buttonBloquear.Hide();
-            buttonEjecutar.Hide();
-            buttonTerminar.Hide();
             numericUpDownQuantum.Hide();
             labelQuantum.Text += ": " + quantum;
 
@@ -86,6 +85,15 @@ namespace SimuladorProcesos
         private void buttonFinalizar_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                "Luis Alejandro Ponce Brizuela\n\n" +
+                "Seminario de sistemas operativos\n\n" +
+                "TANENBAUM Andrew - Sistemas Operativos Diseno e Implementacion , pag: 84 - 85\n\n" +
+                "Algoritmo de Round Robin");
         }
     }
 }
