@@ -16,14 +16,21 @@ namespace SimuladorProcesos
     public partial class MainForm : Form
     {
         private Process[] process;
-        private LinkedList<Proceso> procesos;
+        private LinkedList<Proceso> procesosPrioridad4;
+        private LinkedList<Proceso> procesosPrioridad3;
+        private LinkedList<Proceso> procesosPrioridad2;
+        private LinkedList<Proceso> procesosPrioridad1;
+
         private Random random;
         private RoundRobin roundRobin;
 
         public MainForm()
         {
             InitializeComponent();
-            procesos = new LinkedList<Proceso>();
+            procesosPrioridad4 = new LinkedList<Proceso>();
+            procesosPrioridad3 = new LinkedList<Proceso>();
+            procesosPrioridad2 = new LinkedList<Proceso>();
+            procesosPrioridad1 = new LinkedList<Proceso>();
             random = new Random();
             process = Process.GetProcesses();
             cargarProcesos();
@@ -34,6 +41,7 @@ namespace SimuladorProcesos
         private void cargarProcesos()
         {
             int tiempo;
+            int prioridad;
 
             /* Carga todo lo procesos*/
             //foreach (Process p in process)
@@ -48,8 +56,15 @@ namespace SimuladorProcesos
             for (int i = 0; i < 15; i++)
             {
                 tiempo = random.Next(2, 5);
-                Proceso proceso = new Proceso(process[i].Id, process[i].ProcessName, tiempo);
-                procesos.AddLast(proceso);
+                prioridad = random.Next(1, 5);
+                Proceso proceso = new Proceso(process[i].Id, process[i].ProcessName, tiempo, prioridad);
+                switch (prioridad)
+                {
+                    case 4:
+                        procesosPrioridad4.AddLast(proceso);
+                        break;
+                }
+                
                 agregarProceso(proceso);
             }
         }
@@ -60,14 +75,15 @@ namespace SimuladorProcesos
             string nombre = proceso.Nombre;
             string estado = proceso.Estado;
             string tiempo = proceso.Tiempo.ToString();
-            string[] row = {id, nombre, estado, tiempo};
+            string prioridad = proceso.Prioridad.ToString();
+            string[] row = {id, nombre, estado, tiempo, prioridad};
             dataGridViewProcesos.Rows.Add(row);
         }
 
         private void buttonCorrer_Click(object sender, EventArgs e)
         {
             int quantum = (int)numericUpDownQuantum.Value;
-            Proceso[] arrProcesos = procesos.ToArray();
+            Proceso[] arrProcesos = procesosPrioridad4.ToArray();
 
             buttonBloquear.Hide();
             numericUpDownQuantum.Hide();
