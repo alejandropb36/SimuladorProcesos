@@ -17,6 +17,7 @@ namespace SimuladorProcesos
     {
         private Process[] process;
         private LinkedList<Proceso> procesos;
+
         private Random random;
         private RoundRobin roundRobin;
 

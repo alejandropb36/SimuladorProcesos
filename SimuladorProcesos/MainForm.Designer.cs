@@ -73,7 +73,7 @@
             this.buttonEjecutar.Click += new System.EventHandler(this.buttonCorrer_Click);
             // 
             // buttonBloquear
-            // 
+            //
             this.buttonBloquear.Location = new System.Drawing.Point(655, 91);
             this.buttonBloquear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonBloquear.Name = "buttonBloquear";
@@ -84,7 +84,7 @@
             this.buttonBloquear.Click += new System.EventHandler(this.buttonSuspender_Click);
             // 
             // buttonTerminar
-            // 
+            //
             this.buttonTerminar.Location = new System.Drawing.Point(655, 127);
             this.buttonTerminar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonTerminar.Name = "buttonTerminar";
