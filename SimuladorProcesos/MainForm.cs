@@ -34,7 +34,7 @@ namespace SimuladorProcesos
         private void cargarProcesos()
         {
             int tiempo;
-
+            int prioridad;
             /* Carga todo lo procesos*/
             //foreach (Process p in process)
             //{
@@ -48,7 +48,8 @@ namespace SimuladorProcesos
             for (int i = 0; i < 15; i++)
             {
                 tiempo = random.Next(2, 5);
-                Proceso proceso = new Proceso(process[i].Id, process[i].ProcessName, tiempo);
+                prioridad = random.Next(1, 5);
+                Proceso proceso = new Proceso(process[i].Id, process[i].ProcessName, tiempo, prioridad);
                 procesos.AddLast(proceso);
                 agregarProceso(proceso);
             }
@@ -60,7 +61,8 @@ namespace SimuladorProcesos
             string nombre = proceso.Nombre;
             string estado = proceso.Estado;
             string tiempo = proceso.Tiempo.ToString();
-            string[] row = {id, nombre, estado, tiempo};
+            string prioridad = proceso.Prioridad.ToString();
+            string[] row = {id, nombre, estado, tiempo, prioridad};
             dataGridViewProcesos.Rows.Add(row);
         }
 
