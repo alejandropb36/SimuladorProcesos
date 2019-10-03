@@ -46,7 +46,7 @@ namespace SimuladorProcesos
             //}
 
             /*Carga solo 15*/
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 15; i++)
             {
                 tiempo = random.Next(2, 5);
                 prioridad = random.Next(1, 5);
@@ -95,8 +95,8 @@ namespace SimuladorProcesos
             MessageBox.Show(
                 "Luis Alejandro Ponce Brizuela\n\n" +
                 "Seminario de sistemas operativos\n\n" +
-                "TANENBAUM Andrew - Sistemas Operativos Diseno e Implementacion , pag: 84 - 85\n\n" +
-                "Algoritmo de Round Robin");
+                "TANENBAUM Andrew - Sistemas Operativos Diseno e Implementacion , pag: 86\n\n" +
+                "Algoritmo de Colas Multiples");
         }
     }
 }
