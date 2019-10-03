@@ -56,7 +56,7 @@
             this.tiempo,
             this.Prioridad});
             this.dataGridViewProcesos.Location = new System.Drawing.Point(16, 55);
-            this.dataGridViewProcesos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridViewProcesos.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewProcesos.Name = "dataGridViewProcesos";
             this.dataGridViewProcesos.Size = new System.Drawing.Size(616, 466);
             this.dataGridViewProcesos.TabIndex = 0;
@@ -64,7 +64,7 @@
             // buttonEjecutar
             // 
             this.buttonEjecutar.Location = new System.Drawing.Point(655, 55);
-            this.buttonEjecutar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonEjecutar.Margin = new System.Windows.Forms.Padding(4);
             this.buttonEjecutar.Name = "buttonEjecutar";
             this.buttonEjecutar.Size = new System.Drawing.Size(100, 28);
             this.buttonEjecutar.TabIndex = 1;
@@ -73,9 +73,9 @@
             this.buttonEjecutar.Click += new System.EventHandler(this.buttonCorrer_Click);
             // 
             // buttonBloquear
-            //
+            // 
             this.buttonBloquear.Location = new System.Drawing.Point(655, 91);
-            this.buttonBloquear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonBloquear.Margin = new System.Windows.Forms.Padding(4);
             this.buttonBloquear.Name = "buttonBloquear";
             this.buttonBloquear.Size = new System.Drawing.Size(100, 28);
             this.buttonBloquear.TabIndex = 2;
@@ -84,9 +84,9 @@
             this.buttonBloquear.Click += new System.EventHandler(this.buttonSuspender_Click);
             // 
             // buttonTerminar
-            //
+            // 
             this.buttonTerminar.Location = new System.Drawing.Point(655, 127);
-            this.buttonTerminar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonTerminar.Margin = new System.Windows.Forms.Padding(4);
             this.buttonTerminar.Name = "buttonTerminar";
             this.buttonTerminar.Size = new System.Drawing.Size(100, 28);
             this.buttonTerminar.TabIndex = 3;
@@ -97,7 +97,7 @@
             // numericUpDownQuantum
             // 
             this.numericUpDownQuantum.Location = new System.Drawing.Point(680, 250);
-            this.numericUpDownQuantum.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDownQuantum.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDownQuantum.Minimum = new decimal(new int[] {
             1,
             0,
@@ -165,7 +165,7 @@
             // 
             // Prioridad
             // 
-            this.Prioridad.HeaderText = "Prioridad";
+            this.Prioridad.HeaderText = "Nivel";
             this.Prioridad.Name = "Prioridad";
             // 
             // MainForm
@@ -181,7 +181,7 @@
             this.Controls.Add(this.dataGridViewProcesos);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "Simulador de procesos Round Robin";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProcesos)).EndInit();

@@ -10,24 +10,40 @@ namespace SimuladorProcesos
     public class RoundRobin
     {
         DataGridView dataGridView;
-        
+        private List<Proceso> ListProcess = new List<Proceso>();
+
         public RoundRobin(ref DataGridView temp_dataGridView)
         {
             dataGridView = temp_dataGridView;
         }
         
-        public void runRoundRobin(ref Proceso[] procesos, int quantum)
+        public void runRoundRobin(ref Proceso[] procesos, int quantum, ref Label labelQuantum)
         {
-            int prioridad = 4;
+            int prioridad = 1;
             bool reducir;
+            int max;
             foreach (var proceso in procesos)
             {
                 proceso.TiempoRestante = proceso.Tiempo;
             }
-            while (prioridad > 0)
+            while (true)
             {
+                max = getMax(procesos);
+                if (prioridad > max)
+                {
+                    break;
+                }
+                
                 reducir = true;
-                foreach (var proceso in procesos)
+                foreach (var task in procesos)
+                {
+                    if (task.Prioridad == prioridad)//verifica la prioridad
+                    {
+                        ListProcess.Add(task);//agrega a nueva lista para ordenar
+                    }
+                }
+                IEnumerable<Proceso> ListProcessOrder = ListProcess.OrderBy(process => process.Tiempo);//ordena los procesos por tiempo
+                foreach (var proceso in ListProcessOrder)
                 {
                     if(proceso.Prioridad == prioridad)
                     {
@@ -35,7 +51,6 @@ namespace SimuladorProcesos
                         {
                             proceso.Estado = "COMPLETED";
                             updateDataGridView(dataGridView, procesos);
-                            reducir = true;
                         }
                         else if (proceso.TiempoRestante > 0)
                         {
@@ -47,6 +62,7 @@ namespace SimuladorProcesos
                                 executionTimer(quantum);
                             
                                 proceso.TiempoRestante = proceso.TiempoRestante - quantum;
+                                proceso.Prioridad = proceso.Prioridad + 1;
                             
                                 proceso.Estado = "READY";
                                 updateDataGridView(dataGridView, procesos);
@@ -67,9 +83,27 @@ namespace SimuladorProcesos
                 }
                 if (reducir)
                 {
-                    prioridad = prioridad - 1; 
+                    prioridad = prioridad + 1;
+                    
+                    quantum = quantum * 2;
+                    Console.WriteLine(quantum);
+                    labelQuantum.Text =  "Quantum: " + quantum.ToString();
+                }
+                
+            }
+        }
+
+        private int getMax(Proceso[] procesos)
+        {
+            int max = procesos[0].Prioridad;
+            foreach(Proceso proceso in procesos)
+            {
+                if (proceso.Prioridad > max)
+                {
+                    max = proceso.Prioridad;
                 }
             }
+            return max;
         }
         
         public void updateDataGridView(DataGridView dataGridView, Proceso[] procesos)

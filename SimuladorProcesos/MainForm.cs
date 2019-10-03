@@ -46,7 +46,7 @@ namespace SimuladorProcesos
             //}
 
             /*Carga solo 15*/
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 5; i++)
             {
                 tiempo = random.Next(2, 5);
                 prioridad = random.Next(1, 5);
@@ -77,7 +77,7 @@ namespace SimuladorProcesos
             labelQuantum.Text += ": " + quantum;
 
             roundRobin = new RoundRobin(ref dataGridViewProcesos);
-            roundRobin.runRoundRobin(ref arrProcesos, quantum);
+            roundRobin.runRoundRobin(ref arrProcesos, quantum, ref labelQuantum);
         }
 
         private void buttonSuspender_Click(object sender, EventArgs e)
