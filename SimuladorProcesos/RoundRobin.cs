@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace SimuladorProcesos
 {
@@ -11,21 +12,43 @@ namespace SimuladorProcesos
     {
         DataGridView dataGridView;
         private List<Proceso> ListProcess = new List<Proceso>();
+        private Random random;
 
         public RoundRobin(ref DataGridView temp_dataGridView)
         {
             dataGridView = temp_dataGridView;
+            random = new Random();
+        }
+
+        private int[] getMemori(Proceso[] procesos)
+        {
+            int[] memori = new int[procesos.Length];
+            for(int i = 0; i < procesos.Length; i++)
+            {
+                memori[i] = procesos[i].Memoria;
+            }
+            return memori;
         }
         
-        public void runRoundRobin(ref Proceso[] procesos, int quantum, ref Label labelQuantum)
+        public void runRoundRobin(ref Proceso[] procesos, int quantum, ref Label labelQuantum, ref ProgressBar progressBarBuffer, ref Chart chartProcesos)
         {
             int prioridad = 1;
             bool reducir;
             int max;
+            int temp;
+            int i;
+            int x;
+            int productor;
+            int[] memoria;
+
+
             foreach (var proceso in procesos)
             {
                 proceso.TiempoRestante = proceso.Tiempo;
             }
+
+            i = x = productor = temp = 0;
+            memoria = getMemori(procesos);
             while (true)
             {
                 max = getMax(procesos);
@@ -37,16 +60,40 @@ namespace SimuladorProcesos
                 reducir = true;
                 foreach (var task in procesos)
                 {
-                    if (task.Prioridad == prioridad)//verifica la prioridad
+                    if (task.Prioridad == prioridad)
                     {
-                        ListProcess.Add(task);//agrega a nueva lista para ordenar
+                        ListProcess.Add(task);
                     }
                 }
-                IEnumerable<Proceso> ListProcessOrder = ListProcess.OrderBy(process => process.Tiempo);//ordena los procesos por tiempo
+                IEnumerable<Proceso> ListProcessOrder = ListProcess.OrderBy(process => process.Tiempo);
                 foreach (var proceso in ListProcessOrder)
                 {
-                    if(proceso.Prioridad == prioridad)
+                    
+                    if (temp > 0)
                     {
+                        if (progressBarBuffer.Value + temp < 100)
+                        {
+                            progressBarBuffer.Value += temp;
+                            temp = 0;
+                        }
+                    }
+                    else
+                    {
+                        productor = random.Next(50, 80);
+                        if (progressBarBuffer.Value + productor < 100)
+                        {
+                            progressBarBuffer.Value += productor;
+                        }
+                        else
+                        {
+                            temp = productor;
+                        }
+                    }
+
+                    if (proceso.Prioridad == prioridad)
+                    {
+                        chartProcesos.Series["Memory"].Points.AddXY(x, memoria[i]);
+
                         if (proceso.TiempoRestante == 0)
                         {
                             proceso.Estado = "COMPLETED";
@@ -63,7 +110,27 @@ namespace SimuladorProcesos
                             
                                 proceso.TiempoRestante = proceso.TiempoRestante - quantum;
                                 proceso.Prioridad = proceso.Prioridad + 1;
-                            
+
+                                //
+                                if (progressBarBuffer.Value - proceso.Memoria < 0)
+                                {
+                                    productor = random.Next(10, 100);
+                                    
+                                    if (progressBarBuffer.Value + productor > 100)
+                                    {
+                                        int aux = progressBarBuffer.Value + productor;
+
+                                        while (aux > 100)
+                                        {
+                                            productor = random.Next(10, 30);
+                                            aux = progressBarBuffer.Value + productor;
+
+                                        }
+                                    }
+                                }
+
+                                progressBarBuffer.Value -= proceso.Memoria;
+
                                 proceso.Estado = "READY";
                                 updateDataGridView(dataGridView, procesos);
                             }
@@ -72,14 +139,40 @@ namespace SimuladorProcesos
                                 proceso.Estado = "RUNNING";
                                 updateDataGridView(dataGridView, procesos);
                                 executionTimer(proceso.TiempoRestante);
-                            
+
+                                //
+                                if (progressBarBuffer.Value - proceso.Memoria < 0)
+                                {
+                                    productor = random.Next(10, 100);
+
+                                    if (progressBarBuffer.Value + productor > 100)
+                                    {
+                                        int aux = progressBarBuffer.Value + productor;
+
+                                        while (aux > 100)
+                                        {
+                                            productor = random.Next(10, 30);
+                                            aux = progressBarBuffer.Value + productor;
+                                        }
+                                    }
+                                }
+
+                                progressBarBuffer.Value -= proceso.Memoria;
+
                                 proceso.TiempoRestante = 0;
                             
                                 proceso.Estado = "COMPLETED";
                                 updateDataGridView(dataGridView, procesos);
                             }  
                         }
+                        i++;
+                        x++;
+                        if (i == procesos.Length)
+                        {
+                            i = 0;
+                        }
                     }
+                   
                 }
                 if (reducir)
                 {
@@ -91,6 +184,9 @@ namespace SimuladorProcesos
                 }
                 
             }
+
+            chartProcesos.Series["Series1"].Points.AddXY(x, 0);
+            progressBarBuffer.Value = 0;
         }
 
         private int getMax(Proceso[] procesos)
@@ -112,32 +208,9 @@ namespace SimuladorProcesos
             
             foreach (var proceso in procesos)
             {
-                string[] row = { proceso.Id.ToString(), proceso.Nombre, proceso.Estado, proceso.TiempoRestante.ToString(), proceso.Prioridad.ToString()};
+                string[] row = { proceso.Id.ToString(), proceso.Nombre, proceso.Estado, proceso.TiempoRestante.ToString(), proceso.Prioridad.ToString(), proceso.Memoria.ToString()};
                 dataGridView.Rows.Add(row);
             }
-        }
-        
-        public void ioExecution(Proceso[] procesos, int id, int interupt)
-        {
-            foreach (var proceso in procesos)
-            {
-                if (proceso.Id == id && proceso.Estado != "COMPLETED")
-                {
-                    proceso.Estado = "WAITING";
-                }
-            }
-            updateDataGridView(dataGridView, procesos);
-            
-            executionTimer(1);
-            
-            foreach (var proceso in procesos)
-            {
-                if (proceso.Id == id && proceso.Estado != "COMPLETED")
-                {
-                    proceso.Estado = "READY";
-                }
-            }
-            updateDataGridView(dataGridView, procesos);
         }
         
         public void executionTimer(int tempTime)

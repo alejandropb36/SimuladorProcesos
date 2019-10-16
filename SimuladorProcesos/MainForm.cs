@@ -36,6 +36,7 @@ namespace SimuladorProcesos
         {
             int tiempo;
             int prioridad;
+            int memoria;
             /* Carga todo lo procesos*/
             //foreach (Process p in process)
             //{
@@ -50,7 +51,8 @@ namespace SimuladorProcesos
             {
                 tiempo = random.Next(2, 5);
                 prioridad = random.Next(1, 5);
-                Proceso proceso = new Proceso(process[i].Id, process[i].ProcessName, tiempo, prioridad);
+                memoria = random.Next(5, 25);
+                Proceso proceso = new Proceso(process[i].Id, process[i].ProcessName, tiempo, prioridad, memoria);
                 procesos.AddLast(proceso);
                 agregarProceso(proceso);
             }
@@ -63,7 +65,8 @@ namespace SimuladorProcesos
             string estado = proceso.Estado;
             string tiempo = proceso.Tiempo.ToString();
             string prioridad = proceso.Prioridad.ToString();
-            string[] row = {id, nombre, estado, tiempo, prioridad};
+            string memoria = proceso.Memoria.ToString();
+            string[] row = {id, nombre, estado, tiempo, prioridad, memoria};
             dataGridViewProcesos.Rows.Add(row);
         }
 
@@ -77,7 +80,7 @@ namespace SimuladorProcesos
             labelQuantum.Text += ": " + quantum;
 
             roundRobin = new RoundRobin(ref dataGridViewProcesos);
-            roundRobin.runRoundRobin(ref arrProcesos, quantum, ref labelQuantum);
+            roundRobin.runRoundRobin(ref arrProcesos, quantum, ref labelQuantum, ref progressBarBuffer, ref chartProcesos);
         }
 
         private void buttonSuspender_Click(object sender, EventArgs e)
@@ -95,8 +98,8 @@ namespace SimuladorProcesos
             MessageBox.Show(
                 "Luis Alejandro Ponce Brizuela\n\n" +
                 "Seminario de sistemas operativos\n\n" +
-                "TANENBAUM Andrew - Sistemas Operativos Diseno e Implementacion , pag: 86\n\n" +
-                "Algoritmo de Colas Multiples");
+                "TANENBAUM Andrew - Sistemas Operativos Diseno e Implementacion , pag: 75\n\n" +
+                "Productor consumidor");
         }
     }
 }
