@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.dataGridViewProcesos = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,10 +64,9 @@
             this.tiempo,
             this.Prioridad,
             this.Memoria});
-            this.dataGridViewProcesos.Location = new System.Drawing.Point(16, 55);
-            this.dataGridViewProcesos.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewProcesos.Location = new System.Drawing.Point(12, 45);
             this.dataGridViewProcesos.Name = "dataGridViewProcesos";
-            this.dataGridViewProcesos.Size = new System.Drawing.Size(735, 466);
+            this.dataGridViewProcesos.Size = new System.Drawing.Size(551, 379);
             this.dataGridViewProcesos.TabIndex = 0;
             // 
             // id
@@ -103,10 +102,9 @@
             // 
             // buttonEjecutar
             // 
-            this.buttonEjecutar.Location = new System.Drawing.Point(824, 159);
-            this.buttonEjecutar.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonEjecutar.Location = new System.Drawing.Point(618, 129);
             this.buttonEjecutar.Name = "buttonEjecutar";
-            this.buttonEjecutar.Size = new System.Drawing.Size(227, 28);
+            this.buttonEjecutar.Size = new System.Drawing.Size(170, 23);
             this.buttonEjecutar.TabIndex = 1;
             this.buttonEjecutar.Text = "Ejecutar";
             this.buttonEjecutar.UseVisualStyleBackColor = true;
@@ -114,10 +112,9 @@
             // 
             // buttonBloquear
             // 
-            this.buttonBloquear.Location = new System.Drawing.Point(759, 55);
-            this.buttonBloquear.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonBloquear.Location = new System.Drawing.Point(569, 45);
             this.buttonBloquear.Name = "buttonBloquear";
-            this.buttonBloquear.Size = new System.Drawing.Size(100, 28);
+            this.buttonBloquear.Size = new System.Drawing.Size(75, 23);
             this.buttonBloquear.TabIndex = 2;
             this.buttonBloquear.Text = "Bloquear";
             this.buttonBloquear.UseVisualStyleBackColor = true;
@@ -125,10 +122,9 @@
             // 
             // buttonTerminar
             // 
-            this.buttonTerminar.Location = new System.Drawing.Point(759, 97);
-            this.buttonTerminar.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonTerminar.Location = new System.Drawing.Point(569, 79);
             this.buttonTerminar.Name = "buttonTerminar";
-            this.buttonTerminar.Size = new System.Drawing.Size(100, 28);
+            this.buttonTerminar.Size = new System.Drawing.Size(75, 23);
             this.buttonTerminar.TabIndex = 3;
             this.buttonTerminar.Text = "Terminar";
             this.buttonTerminar.UseVisualStyleBackColor = true;
@@ -136,15 +132,14 @@
             // 
             // numericUpDownQuantum
             // 
-            this.numericUpDownQuantum.Location = new System.Drawing.Point(872, 97);
-            this.numericUpDownQuantum.Margin = new System.Windows.Forms.Padding(4);
+            this.numericUpDownQuantum.Location = new System.Drawing.Point(654, 79);
             this.numericUpDownQuantum.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.numericUpDownQuantum.Name = "numericUpDownQuantum";
-            this.numericUpDownQuantum.Size = new System.Drawing.Size(75, 22);
+            this.numericUpDownQuantum.Size = new System.Drawing.Size(56, 20);
             this.numericUpDownQuantum.TabIndex = 4;
             this.numericUpDownQuantum.Value = new decimal(new int[] {
             1,
@@ -156,10 +151,9 @@
             // 
             this.labelQuantum.AutoSize = true;
             this.labelQuantum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelQuantum.Location = new System.Drawing.Point(867, 58);
-            this.labelQuantum.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelQuantum.Location = new System.Drawing.Point(650, 47);
             this.labelQuantum.Name = "labelQuantum";
-            this.labelQuantum.Size = new System.Drawing.Size(100, 25);
+            this.labelQuantum.Size = new System.Drawing.Size(82, 20);
             this.labelQuantum.TabIndex = 5;
             this.labelQuantum.Text = "Quantum";
             // 
@@ -170,57 +164,59 @@
             this.infoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1157, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(868, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // infoToolStripMenuItem
             // 
             this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
-            this.infoToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.infoToolStripMenuItem.Text = "Info";
             this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
             // 
             // chartProcesos
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartProcesos.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chartProcesos.Legends.Add(legend3);
-            this.chartProcesos.Location = new System.Drawing.Point(759, 216);
+            chartArea2.Name = "ChartArea1";
+            this.chartProcesos.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chartProcesos.Legends.Add(legend2);
+            this.chartProcesos.Location = new System.Drawing.Point(569, 176);
+            this.chartProcesos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chartProcesos.Name = "chartProcesos";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Legend = "Legend1";
-            series3.Name = "Memory";
-            this.chartProcesos.Series.Add(series3);
-            this.chartProcesos.Size = new System.Drawing.Size(386, 305);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "Memory";
+            this.chartProcesos.Series.Add(series2);
+            this.chartProcesos.Size = new System.Drawing.Size(290, 248);
             this.chartProcesos.TabIndex = 7;
             this.chartProcesos.Text = "chart1";
             // 
             // progressBarBuffer
             // 
-            this.progressBarBuffer.Location = new System.Drawing.Point(161, 538);
+            this.progressBarBuffer.Location = new System.Drawing.Point(121, 437);
+            this.progressBarBuffer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.progressBarBuffer.Name = "progressBarBuffer";
-            this.progressBarBuffer.Size = new System.Drawing.Size(984, 23);
+            this.progressBarBuffer.Size = new System.Drawing.Size(738, 19);
             this.progressBarBuffer.TabIndex = 8;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(34, 538);
+            this.label1.Location = new System.Drawing.Point(26, 437);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 24);
+            this.label1.Size = new System.Drawing.Size(55, 18);
             this.label1.TabIndex = 9;
             this.label1.Text = "Buffer: ";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1157, 573);
+            this.ClientSize = new System.Drawing.Size(868, 466);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBarBuffer);
             this.Controls.Add(this.chartProcesos);
@@ -232,9 +228,8 @@
             this.Controls.Add(this.dataGridViewProcesos);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
-            this.Text = "Productor / Consumidor ";
+            this.Text = "Entradas / Salidas";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProcesos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantum)).EndInit();
             this.menuStrip1.ResumeLayout(false);

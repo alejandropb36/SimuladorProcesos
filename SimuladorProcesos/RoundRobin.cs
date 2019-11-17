@@ -185,7 +185,7 @@ namespace SimuladorProcesos
                 
             }
 
-            chartProcesos.Series["Series1"].Points.AddXY(x, 0);
+            chartProcesos.Series["Memory"].Points.AddXY(x, 0);
             progressBarBuffer.Value = 0;
         }
 

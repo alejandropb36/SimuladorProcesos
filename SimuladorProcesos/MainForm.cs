@@ -17,7 +17,8 @@ namespace SimuladorProcesos
     {
         private Process[] process;
         private LinkedList<Proceso> procesos;
-
+        private string[] entradasSalidas;
+        private string[] almecenamiento;
         private Random random;
         private RoundRobin roundRobin;
 
@@ -27,6 +28,8 @@ namespace SimuladorProcesos
             procesos = new LinkedList<Proceso>();
             random = new Random();
             process = Process.GetProcesses();
+            entradasSalidas = new string[] {"Keyboard", "Mouse", "Screen", "Speaker", "Print", "Microphone", "Headsphones"};
+            almecenamiento = new string[] { "READ", "WRITE" };
             cargarProcesos();
             buttonBloquear.Hide();
             buttonTerminar.Hide();
@@ -37,6 +40,7 @@ namespace SimuladorProcesos
             int tiempo;
             int prioridad;
             int memoria;
+            int name;
             /* Carga todo lo procesos*/
             //foreach (Process p in process)
             //{
@@ -52,7 +56,9 @@ namespace SimuladorProcesos
                 tiempo = random.Next(2, 5);
                 prioridad = random.Next(1, 5);
                 memoria = random.Next(5, 25);
-                Proceso proceso = new Proceso(process[i].Id, process[i].ProcessName, tiempo, prioridad, memoria);
+                name = random.Next(0, 7);
+                name = random.Next(0, 2);
+                Proceso proceso = new Proceso(process[i].Id, almecenamiento[name], tiempo, prioridad, memoria);
                 procesos.AddLast(proceso);
                 agregarProceso(proceso);
             }
